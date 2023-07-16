@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RequestValidationDemo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,41 @@ namespace RequestValidationDemo.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult ValidateInputDemo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult ValidateInputDemo(ValidateInputDemoVM data)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(data);
+        }
+
+
+        public ActionResult AllowHtmlDemo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(true)]
+        public ActionResult AllowHtmlDemo(AllowHtmlDemoVM data)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View(data);
         }
     }
 }
